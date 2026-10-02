@@ -48,12 +48,19 @@ Everything listed here is implemented:
 
 ```yaml
 dependencies:
-  mobile_scanner: ^0.1.0
+  mobile_scanner:
+    hosted: https://dartpub.dev
+    version: ^0.1.0
 ```
 
 ```sh
 dn pub get
 ```
+
+The `hosted:` line is required, not optional. DartNative plugins live on
+dartpub.dev, and an unrelated Flutter package also called `mobile_scanner` is
+published on pub.dev. Without `hosted:`, `dn pub get` resolves that one instead
+and pulls in the Flutter SDK with it.
 
 That is all. `dn pub get` regenerates `lib/dartnative_plugin_registrant.dart`, and
 `registerAll()` loads this plugin's symbols and registers its view:
