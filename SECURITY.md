@@ -7,12 +7,11 @@ Please report security issues **privately**, not as a public issue.
 Use GitHub's private vulnerability reporting on this repository:
 **Security > Report a vulnerability**.
 
-> **Publication readiness item.** Private vulnerability reporting must be enabled
-> in the repository settings before this package is published, and no private
-> security contact address is published here on purpose: inventing one would be
-> worse than naming none. If you need an address and the GitHub form is not
-> available to you, open a public issue asking for a private channel, without
-> including details of the vulnerability.
+Private vulnerability reporting is enabled on this repository. No private
+security contact address is published here on purpose: inventing one would be
+worse than naming none. If the GitHub form is not available to you, open a
+public issue asking for a private channel, without including any details of the
+vulnerability itself.
 
 Please include the plugin version, the platform and OS version, and the smallest
 reproduction you can manage. You can expect an acknowledgement; this is a

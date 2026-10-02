@@ -305,29 +305,28 @@ first-party `dartnative_share`, which has no view at all, declares the same
 
 ## 7. Validation status
 
-The licence blocker recorded here during development has since been resolved by
-the repository owner configuring a DartNative licence locally, and iOS physical
-validation was then carried out.
+The licence blocker recorded here during development was resolved by the
+repository owner configuring a DartNative licence locally, after which physical
+validation was carried out on both platforms.
 
 **iOS: validated** on an iPhone 15 Pro Max running iOS 26.6. All thirteen formats,
 the controller and lifecycle matrix, camera switching, torch, zoom, the scan window
-including landscape and the front camera, duplicate suppression, multi-barcode
-frames, a hot restart with detections in flight, and a ten-minute soak. Evidence
-was produced from a build made out of a hashed source tree, so it is tied to a
-specific binary rather than inferred from chronology.
+in portrait and landscape and on the front camera, duplicate suppression,
+multi-barcode frames, a hot restart with detections in flight, and a 295-cycle
+soak. Evidence was produced from a build made out of a hashed source tree, so it
+is tied to a specific binary rather than inferred from chronology.
 
-Two defects were found during that validation, both invisible to the unit tests:
+**Android: validated** on a Galaxy S23 Ultra running Android 16 (API 36). All
+thirteen formats, the permission matrix, the controller and lifecycle matrix,
+mount and dispose, the second-instance `cameraInUse` rejection, generation
+isolation across 16 camera switches with no stale-frame leaks, a sustained load
+of 15,403 analyzed frames with no `ImageProxy` pool-exhaustion signature, and a
+311-cycle soak with zero errors and no heap growth.
 
-1. Application-issued controller commands rode the reconciler's mutation batch,
-   which only flushes on a frame, so on an idle application a command could be
-   delayed indefinitely. Measured at over 8 seconds before the fix and 26 to 32 ms
-   after it.
-2. The documentation claimed that a barcode straddling the scan-window edge is
-   reported on both platforms. That is false on iOS, where `rectOfInterest`
-   constrains native decoding. The scan-window contract has been reworded, and the
-   platform asymmetry is documented rather than removed.
-
-**Android: not validated.** It compiles, its unit tests pass and the example APK
-builds, but it has not been run on a physical device. That is the remaining
-blocker for a stable release, and `doc/manual-test-matrix.md` carries the
-unexecuted rows.
+Five defects were found during physical validation, none of them visible to the
+unit tests. They are tabulated in `doc/manual-test-matrix.md` together with the
+fix and the regression coverage for each. The one that justified Android
+validation on its own was the JNI defect: `dlsym(RTLD_DEFAULT, "DN_IsolateGen")`
+silently fails under Android's linker namespaces, so hot-restart protection was
+absent and every debug hot restart aborted the process. No amount of iOS testing
+could have found it, because iOS resolves that symbol by a different mechanism.
