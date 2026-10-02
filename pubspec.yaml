@@ -1,0 +1,50 @@
+name: mobile_scanner
+description: >
+  Real-time barcode and QR scanning for DartNative. Recognition stays native:
+  AVFoundation's AVCaptureMetadataOutput on iOS, CameraX plus Google ML Kit on
+  Android. Camera frames never cross into Dart.
+version: 0.1.0
+publish_to: 'none'
+
+repository: https://github.com/batustun/dartnative_mobile_scanner
+issue_tracker: https://github.com/batustun/dartnative_mobile_scanner/issues
+
+environment:
+  sdk: ^3.9.0-0
+
+dependencies:
+  dartnative: ^1.0.0
+  ffi: ^2.1.0
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.0
+
+# dartnative plugin manifest, consumed by the SDK's injectPlugins pass on every
+# `dn pub get`.
+#
+# ios.ffiPlugin: true  -> the pod's @_cdecl symbols link into the app binary, so
+#                         Dart resolves them via DynamicLibrary.process().
+# android.package +     -> emits the FlutterPlugin instantiation in the generated
+# android.pluginClass      registrant. That call site is the only one that fires
+#                          JNI_OnLoad for our .so, and it is also where the view
+#                          provider registers itself. Never `ffiPlugin: true` on
+#                          Android: it bundles the .so with no System.loadLibrary,
+#                          so JNI_OnLoad never runs and the first JNI callback
+#                          dies with SIGSEGV in _JavaVM::GetEnv.
+dartnative:
+  plugin:
+    platforms:
+      ios:
+        ffiPlugin: true
+      android:
+        package: com.dartnative.mobile_scanner
+        pluginClass: DartNativeMobileScannerPlugin
+  # The registrant generator discovers this block through
+  # .dart_tool/package_config.json and emits the import plus the call into the
+  # app's lib/dartnative_plugin_registrant.dart, which registerAll() runs.
+  registrant:
+    imports:
+      - package:mobile_scanner/mobile_scanner.dart
+    calls:
+      - MobileScannerBindings.loadSymbols();

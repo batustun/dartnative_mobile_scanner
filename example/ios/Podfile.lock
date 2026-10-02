@@ -1,0 +1,33 @@
+PODS:
+  - dartnative_ios (1.0.0):
+    - FlexLayout (= 2.0.10)
+  - DartNativeCore (1.0.0)
+  - FlexLayout (2.0.10)
+  - mobile_scanner (0.1.0)
+
+DEPENDENCIES:
+  - dartnative_ios (from `.symlinks/plugins/dartnative_ios/ios`)
+  - DartNativeCore (from `DartNative`)
+  - mobile_scanner (from `.symlinks/plugins/mobile_scanner/ios`)
+
+SPEC REPOS:
+  trunk:
+    - FlexLayout
+
+EXTERNAL SOURCES:
+  dartnative_ios:
+    :path: ".symlinks/plugins/dartnative_ios/ios"
+  DartNativeCore:
+    :path: DartNative
+  mobile_scanner:
+    :path: ".symlinks/plugins/mobile_scanner/ios"
+
+SPEC CHECKSUMS:
+  dartnative_ios: 88d434758a21de28291d1ca70f9a144bd28548c7
+  DartNativeCore: 225e49d9e35e234bcadc6b81586fc4275a1006ee
+  FlexLayout: ea94491c923485f7f28891cb5b10245d22df380b
+  mobile_scanner: 570c18c9f9b45c122c2d8663b7678e42aec2fd77
+
+PODFILE CHECKSUM: 0eb83f38c0038ca753c95effc43e8a0e67ec8c2c
+
+COCOAPODS: 1.16.2

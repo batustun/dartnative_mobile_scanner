@@ -1,0 +1,115 @@
+THIRD-PARTY NOTICES - mobile_scanner
+
+This plugin links third-party components on Android. Their terms are summarised
+below and this file must accompany source and binary distributions of the plugin.
+
+No third-party source code has been copied into this plugin. The implementation is
+original, written against the platform documentation.
+
+==============================================================================
+1. Google ML Kit Barcode Scanning  -  NOT AN OPEN-SOURCE LICENCE
+==============================================================================
+
+    com.google.mlkit:barcode-scanning:17.3.0
+
+Licence declared by the artifact's own POM:
+
+    Name: ML Kit Terms of Service
+    URL:  https://developers.google.com/ml-kit/terms
+
+This is a proprietary Google SDK, not Apache 2.0 and not any other open-source
+licence, and the bundled barcode model is compiled into the application.
+
+IF YOU SHIP AN APP USING THIS PLUGIN. Android barcode recognition uses Google's
+ML Kit Barcode Scanning SDK and is subject to the applicable ML Kit and Google API
+terms. Application developers and distributors are responsible for reviewing and
+complying with those terms for their own use and distribution. Those terms are
+Google's, may change, and are the authority on their own scope and on any
+acceptance mechanism they define.
+
+    ML Kit terms:      https://developers.google.com/ml-kit/terms
+    Google APIs terms: https://developers.google.com/terms
+
+The MIT licence covering this plugin applies to this plugin's own code only. It
+conveys no rights to ML Kit.
+
+Nothing in this file is legal advice.
+
+Note on data handling. Barcode image processing is performed on the device, and the
+bundled model means there is no first-run model download. This plugin itself makes
+no network call and adds no telemetry of its own. The ML Kit SDK is Google software
+operating under Google's terms: it may collect and transmit diagnostics, device and
+application information, and performance or utilisation metrics, and may contact
+Google services, as described in Google's current terms and privacy documentation.
+Selecting the bundled model governs where the model comes from; it does not remove
+ML Kit's own reporting. Review Google's current data disclosure requirements for
+your own privacy policy and for a Google Play Data Safety declaration.
+
+==============================================================================
+2. AndroidX
+==============================================================================
+
+    androidx.camera:camera-core:1.6.2
+    androidx.camera:camera-camera2:1.6.2
+    androidx.camera:camera-lifecycle:1.6.2
+    androidx.camera:camera-view:1.6.2
+    androidx.core:core-ktx:1.12.0
+    androidx.annotation:annotation:1.7.1
+    androidx.fragment:fragment-ktx:1.6.2
+    androidx.lifecycle:lifecycle-common:2.7.0
+    androidx.lifecycle:lifecycle-runtime-ktx:2.7.0
+
+Copyright The Android Open Source Project
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+these files except in compliance with the License. You may obtain a copy of the
+License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied. See the License for the
+specific language governing permissions and limitations under the License.
+
+The CameraX artifacts additionally declare BSD-3-Clause in their POM metadata, for
+portions carrying that licence:
+
+    https://opensource.org/licenses/BSD-3-Clause
+
+==============================================================================
+3. iOS
+==============================================================================
+
+The iOS implementation uses only Apple system frameworks shipped with the
+operating system: AVFoundation, UIKit and CoreMedia. No third-party iOS
+dependency is linked, and the plugin's pod vendors no binaries.
+
+==============================================================================
+4. DartNative
+==============================================================================
+
+    dartnative
+
+The framework this plugin extends, used as a declared dependency and resolved from
+the DartNative SDK. It is not redistributed here. Its own terms apply:
+
+    https://dartnative.com/license
+
+==============================================================================
+5. On Flutter's mobile_scanner
+==============================================================================
+
+Flutter's `mobile_scanner` package was consulted for API ergonomics, so a
+developer moving from it finds familiar names such as `MobileScanner`,
+`MobileScannerController`, `BarcodeCapture`, `DetectionSpeed` and `scanWindow`.
+
+No code was copied from it, and no part of its architecture is used: this plugin
+has no `MethodChannel`, no `EventChannel`, no platform-view implementation and no
+dependency on Flutter. The native implementations here were written against the
+AVFoundation, CameraX and ML Kit documentation. Several behaviours differ
+deliberately, in particular the duplicate-suppression semantics and the coordinate
+space used for geometry and the scan window; both are specified in the README.
+
+This note is a courtesy record of influence, not a licence attribution, because no
+licensed material was reused.
